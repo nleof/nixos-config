@@ -21,9 +21,4 @@
         pdf-tools
       ];
   };
-
-  services.emacs = {
-    enable = true;
-    startWithUserSession = true;
-  };
 }
