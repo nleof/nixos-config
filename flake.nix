@@ -11,11 +11,14 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, nixos-hardware, ... }@inputs:
+  outputs =
+    { self, nixpkgs, home-manager, agenix, nixos-hardware, yawp, ... }@attrs:
     let
       mkSystem = extraModules:
         nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
+
+          specialArgs = { inherit attrs; };
 
           modules = [
             agenix.nixosModules.default
@@ -61,8 +64,9 @@
           ./modules/system/desktop.nix
         ];
 
-        vps = nixpkgs.lib.nixosSystem {
+        vps = nixpkgs.lib.nixosSystem rec {
           system = "aarch64-linux";
+          specialArgs = { inherit attrs; };
           modules =
             [ ./hosts/vps/configuration.nix ./modules/system/server.nix ];
         };
