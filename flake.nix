@@ -9,6 +9,9 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    yawp.url = "git+https://github.com/nleof/yawp?submodules=1";
+    yawp.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

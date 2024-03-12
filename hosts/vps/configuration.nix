@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, attrs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   zramSwap.enable = true;
@@ -49,7 +49,7 @@
     virtualHosts."www.yawp.dev" = {
       forceSSL = true;
       enableACME = true;
-      root = "/srv/www/yawp";
+      root = "${attrs.yawp.packages.aarch64-linux.yawp}";
     };
   };
 }
