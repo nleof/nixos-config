@@ -1,5 +1,10 @@
-{
+{ pkgs, attrs, ... }: {
+  home.username = "alx";
+  programs.home-manager.enable = true;
+
   imports = [
+    attrs.agenix.homeManagerModules.default
+
     ./tty/fish.nix
     ./tty/starship.nix
     ./tty/git.nix
@@ -27,4 +32,8 @@
     ./desktops/gnome.nix
     ./desktops/sway.nix
   ];
+
+  home.packages = with pkgs; [ age attrs.agenix.packages.${system}.default ];
+
+  home.stateVersion = "23.11";
 }

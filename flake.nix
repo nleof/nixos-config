@@ -30,23 +30,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit attrs; };
 
-              home-manager.users.alx = { pkgs, lib, ... }: {
-                home.username = "alx";
-                programs.home-manager.enable = true;
-
-                imports = [
-                  agenix.homeManagerModules.default
-                  ./modules/home/default.nix
-                ];
-
-                home.packages = with pkgs; [
-                  age
-                  agenix.packages.${system}.default
-                ];
-
-                home.stateVersion = "23.11";
-              };
+              home-manager.users.alx = ./modules/home/alx.nix;
             }
           ] ++ extraModules;
         };
