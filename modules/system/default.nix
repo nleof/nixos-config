@@ -30,7 +30,7 @@
     git
     vim
     wget
-    htop
+    btop
     jq
     tree
     patch
