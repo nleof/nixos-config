@@ -21,8 +21,6 @@
         nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
 
-          specialArgs = { inherit attrs; };
-
           modules = [
             agenix.nixosModules.default
 
@@ -30,7 +28,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit attrs; };
+              home-manager.extraSpecialArgs = { inherit agenix; };
 
               home-manager.users.alx = ./modules/home/alx.nix;
             }
@@ -55,7 +53,7 @@
 
         vps = nixpkgs.lib.nixosSystem rec {
           system = "aarch64-linux";
-          specialArgs = { inherit attrs; };
+          specialArgs = { inherit yawp; };
           modules =
             [ ./hosts/vps/configuration.nix ./modules/system/server.nix ];
         };
