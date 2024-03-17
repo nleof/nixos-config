@@ -54,8 +54,11 @@
         vps = nixpkgs.lib.nixosSystem rec {
           system = "aarch64-linux";
           specialArgs = { inherit yawp; };
-          modules =
-            [ ./hosts/vps/configuration.nix ./modules/system/server.nix ];
+          modules = [
+            agenix.nixosModules.default
+            ./hosts/vps/configuration.nix
+            ./modules/system/server.nix
+          ];
         };
       };
     };

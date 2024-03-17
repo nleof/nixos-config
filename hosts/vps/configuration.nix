@@ -1,4 +1,4 @@
-{ pkgs, yawp, ... }: {
+{ pkgs, config, yawp, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   zramSwap.enable = true;
@@ -13,6 +13,16 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 443 ];
+  };
+
+  age.secrets.miniflux.file = ../../secrets/miniflux.age;
+  services.miniflux = {
+    enable = true;
+    adminCredentialsFile = config.age.secrets.miniflux.path;
+    config = {
+      LISTEN_ADDR = "localhost:8080";
+      BASE_URL = "https://reader.yawp.dev";
+    };
   };
 
   security.acme = {
@@ -50,6 +60,13 @@
       forceSSL = true;
       enableACME = true;
       root = "${yawp.packages.aarch64-linux.yawp}";
+    };
+
+    virtualHosts."reader.yawp.dev" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass =
+        "http://${config.services.miniflux.config.LISTEN_ADDR}";
     };
   };
 }

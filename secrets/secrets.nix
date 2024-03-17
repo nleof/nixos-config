@@ -6,5 +6,10 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICyuc0Vly03Yxc1IZgozDb+wO9Z+uj+/SOIeRmHBDAqr root@thinkpad";
   desktop =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQGxJ1BI0evm6hFq9Xf1OhLgQEq0gLdJTPReHnXclCa root@desktop";
-  hosts = [ thinkpad desktop ];
-in { "samba.age".publicKeys = users ++ hosts; }
+  vps =
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkeHFUQpGEPU8Arh+dU6OBDg+cnfE9/p/f31tU584r5iBFlkJzzQCJoTPmKaswmZRJ8BgYHsOcThFfahTt2nh34kB2NocYVkzcNwD70RklxAwuR2mIpoOnu7EvrrdW+Ti5PhQrPKEkBOv7hsqC+bqzh+2G8U+aFMjJU9WA1SzpnmmPIlPJbqDLrfcZFNmNwqftGWZ9wVzTdZwlMVFwemURgkyTlXmZFXWcu3hmtK4rlH/D5cIDSVRdAiWsRy2MKOfD24du5Wb+uIDvNsQZmvAARGoO4pzmYPrE09uJjit66SOHgz8W0jtA87MEXrNj8EE856d5StcoCyfa2z0B4TV+bR2P4w9jhSY1xycjKYv3qxgcrks3VvBLrH0QesvR1vdi+Rq8URKcuwlrynb2OWtsc8B5V56m1B8PVXMDHmwbtjMFrQA8/7ITdnoZuommJFYp3M4B024Q1IAaOBh/wvWbBRTZt531/gw/lhZj0Lkmn5i1C6nceXXsshz6evI0x6U= root@debian-4gb-nbg1-1";
+  hosts = [ thinkpad desktop vps ];
+in {
+  "samba.age".publicKeys = users ++ hosts;
+  "miniflux.age".publicKeys = users ++ hosts;
+}

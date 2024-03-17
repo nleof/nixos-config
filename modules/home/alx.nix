@@ -1,6 +1,10 @@
 { pkgs, agenix, ... }: {
-  home.username = "alx";
   programs.home-manager.enable = true;
+
+  home.stateVersion = "23.11";
+  home.username = "alx";
+
+  home.packages = with pkgs; [ age agenix.packages.${system}.default ];
 
   imports = [
     agenix.homeManagerModules.default
@@ -32,8 +36,4 @@
     ./desktops/gnome.nix
     ./desktops/sway.nix
   ];
-
-  home.packages = with pkgs; [ age agenix.packages.${system}.default ];
-
-  home.stateVersion = "23.11";
 }
