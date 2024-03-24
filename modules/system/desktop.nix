@@ -6,6 +6,7 @@
     ./gnome.nix
     ./sway.nix
     ./samba.nix
+    ./tailscale.nix
     ./prometheus.nix
   ];
 

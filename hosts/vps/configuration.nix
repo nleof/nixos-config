@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./tailscale.nix
     ./dns.nix
     ./miniflux.nix
     ./prometheus.nix
