@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./dns.nix
     ./miniflux.nix
   ];
 
