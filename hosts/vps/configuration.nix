@@ -19,6 +19,8 @@
     allowedTCPPorts = [ 22 80 443 ];
   };
 
+  services.fail2ban.enable = true;
+
   age.secrets.ovh.file = ../../secrets/ovh.age;
   security.acme = {
     acceptTerms = true;
