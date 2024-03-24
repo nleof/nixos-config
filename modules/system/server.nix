@@ -1,1 +1,1 @@
-{ imports = [ ./default.nix ]; }
+{ imports = [ ./default.nix ./tailscale.nix ]; }
