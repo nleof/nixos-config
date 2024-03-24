@@ -4,6 +4,7 @@
 
     ./dns.nix
     ./miniflux.nix
+    ./prometheus.nix
   ];
 
   zramSwap.enable = true;

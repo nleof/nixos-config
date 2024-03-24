@@ -1,7 +1,13 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./default.nix ./gnome.nix ./sway.nix ./samba.nix ];
+  imports = [
+    ./default.nix
+    ./gnome.nix
+    ./sway.nix
+    ./samba.nix
+    ./prometheus.nix
+  ];
 
   security.allowSimultaneousMultithreading = true;
   security.forcePageTableIsolation = false;
