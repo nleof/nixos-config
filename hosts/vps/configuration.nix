@@ -25,10 +25,37 @@
     };
   };
 
+  age.secrets.ovh.file = ../../secrets/ovh.age;
   security.acme = {
     acceptTerms = true;
     defaults.email = "alexandre@yawp.fr";
+
+    certs."yawp.fr" = {
+      domain = "yawp.fr";
+      extraDomainNames = [ "*.yawp.fr" ];
+      dnsProvider = "ovh";
+      dnsPropagationCheck = true;
+      credentialsFile = config.age.secrets.ovh.path;
+    };
+
+    certs."yawp.dev" = {
+      domain = "yawp.dev";
+      extraDomainNames = [ "*.yawp.dev" ];
+      dnsProvider = "ovh";
+      dnsPropagationCheck = true;
+      credentialsFile = config.age.secrets.ovh.path;
+    };
+
+    certs."lan.yawp.dev" = {
+      domain = "lan.yawp.dev";
+      extraDomainNames = [ "*.lan.yawp.dev" ];
+      dnsProvider = "ovh";
+      dnsPropagationCheck = true;
+      credentialsFile = config.age.secrets.ovh.path;
+    };
   };
+
+  users.users.nginx.extraGroups = [ "acme" ];
 
   services.nginx = {
     enable = true;
@@ -40,25 +67,25 @@
 
     virtualHosts."yawp.fr" = {
       forceSSL = true;
-      enableACME = true;
+      useACMEHost = "yawp.fr";
       globalRedirect = "www.yawp.fr";
     };
 
     virtualHosts."www.yawp.fr" = {
       forceSSL = true;
-      enableACME = true;
+      useACMEHost = "yawp.fr";
       globalRedirect = "www.yawp.dev";
     };
 
     virtualHosts."yawp.dev" = {
       forceSSL = true;
-      enableACME = true;
+      useACMEHost = "yawp.dev";
       globalRedirect = "www.yawp.dev";
     };
 
     virtualHosts."www.yawp.dev" = {
       forceSSL = true;
-      enableACME = true;
+      useACMEHost = "yawp.dev";
       root = "${yawp.packages.aarch64-linux.yawp}";
     };
 

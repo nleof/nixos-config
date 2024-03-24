@@ -12,4 +12,5 @@ let
 in {
   "samba.age".publicKeys = users ++ hosts;
   "miniflux.age".publicKeys = users ++ hosts;
+  "ovh.age".publicKeys = users ++ hosts;
 }
