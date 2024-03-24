@@ -24,6 +24,15 @@
 
   services.fail2ban.enable = true;
 
+  # TODO
+  systemd.network.enable = true;
+  systemd.network.networks."10-wan" = {
+    matchConfig.Name = "enp1s0";
+    networkConfig.DHCP = "ipv4";
+    address = [ "2a01:4f8:c0c:4f02::/64" ];
+    routes = [{ routeConfig.Gateway = "fe80::1"; }];
+  };
+
   age.secrets.ovh.file = ../../secrets/ovh.age;
   security.acme = {
     acceptTerms = true;
