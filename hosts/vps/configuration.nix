@@ -1,5 +1,9 @@
 { pkgs, config, yawp, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+
+    ./miniflux.nix
+  ];
 
   zramSwap.enable = true;
   networking.hostName = "debian-4gb-nbg1-1";
@@ -13,16 +17,6 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 443 ];
-  };
-
-  age.secrets.miniflux.file = ../../secrets/miniflux.age;
-  services.miniflux = {
-    enable = true;
-    adminCredentialsFile = config.age.secrets.miniflux.path;
-    config = {
-      LISTEN_ADDR = "localhost:8080";
-      BASE_URL = "https://reader.yawp.dev";
-    };
   };
 
   age.secrets.ovh.file = ../../secrets/ovh.age;
@@ -87,13 +81,6 @@
       forceSSL = true;
       useACMEHost = "yawp.dev";
       root = "${yawp.packages.aarch64-linux.yawp}";
-    };
-
-    virtualHosts."reader.yawp.dev" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass =
-        "http://${config.services.miniflux.config.LISTEN_ADDR}";
     };
   };
 }
