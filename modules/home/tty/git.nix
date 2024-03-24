@@ -47,6 +47,7 @@
       init.defaultBranch = "main";
       core.editor = "vi";
       commit.gpgsign = true;
+      commit.verbose = true;
       gpg.format = "ssh";
       branch = {
         autoSetupMerge = true;
@@ -54,6 +55,7 @@
       };
       pull.rebase = true;
       push.autoSetupRemote = true;
+      rebase.autostash = true;
       url."ssh://git@github.com/nleof".insteadOf = "https://github.com/nleof";
       url."ssh://git@github.com/360Learning".insteadOf =
         "https://github.com/360Learning";
